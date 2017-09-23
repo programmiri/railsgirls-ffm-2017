@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1>All the cats</h1>
+      <%= link_to 'New Cat', new_cat_path, class: "btn btn-primary" %>
+    </div>
+    <div class="row">
+      <% @cats.each do |cat| %>
+        <div class="col">
+          <%= image_tag cat.picture %>
+            <% if user_signed_in? && cat.user == current_user %>
+              <%= link_to icon('trash'), cat, method: :delete, data: { confirm: 'Are you sure?' } %>
+            <% end %>
+        <% end %>
+
+        <% if user_signed_in? %>
+        <a href="/cats?user=me">Show my cats</a>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

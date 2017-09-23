@@ -13,10 +13,12 @@
  */
 
 @import 'vars';
-
 @import 'nav';
 
 /*Views*/
+
+@import "font-awesome-sprockets";
+@import "font-awesome";
 
 @import 'ideas';
 @import 'pages';
