@@ -17,9 +17,10 @@
 
 /*Views*/
 
-@import "font-awesome-sprockets";
-@import "font-awesome";
+@import 'font-awesome-sprockets';
+@import 'font-awesome';
 
+@import 'layout';
 @import 'ideas';
 @import 'pages';
 @import 'welcome';
