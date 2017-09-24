@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<div class="container-fluid">
+<div class="container-fluid all-cats">
   <div class="row">
     <div class="col">
       <h1>All the cats</h1>
@@ -15,10 +15,23 @@
     <% @cats.each do |cat| %>
       <div class="card">
         <%= image_tag cat.picture_url(:thumb), :class => "card-img-top" if cat.picture.present? %>
-        <div class="card-body">
-          vote
+        <div class="card-body clearfix">
+          <div class="float-left">
+            <button class="btn btn-link">
+              <span class="badge badge-secondary">
+                1000 <%= icon('chevron-circle-up') %>
+              </span>
+            </button>
+          </div>
           <% if user_signed_in? && cat.user == current_user %>
-            <%= link_to icon('trash'), cat, method: :delete, data: { confirm: 'Are you sure?' } %>
+            <div class="text-right">
+              <%= link_to icon('trash'), cat, :class => "card-link btn btn-secondary", method: :delete, data: { confirm: 'Are you sure?' } %>
+            </div>
+          <% else %>
+            <div class="btn-group float-right" role="group">
+              <%= link_to icon('chevron-circle-up'), cat, :class => "card-link btn btn-success" %>
+              <%=  link_to icon('chevron-circle-down'), cat, :class => "card-link btn btn-danger" %>
+            </div>
           <% end %>
         </div>
       </div>
