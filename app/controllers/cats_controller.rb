@@ -34,7 +34,7 @@ class CatsController < ApplicationController
 
     respond_to do |format|
       if @cat.save
-        format.html { redirect_to @cat, notice: 'Cat was successfully created.' }
+        format.html { redirect_to @cat, notice: 'Your cat was successfully added!' }
         format.json { render :show, status: :created, location: @cat }
       else
         format.html { render :new }

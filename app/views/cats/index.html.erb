@@ -1,38 +1,42 @@
 <p id="notice"><%= notice %></p>
 
-<div class="container-fluid all-cats">
-  <div class="row">
-    <div class="col">
-      <h1>All the cats</h1>
-      <%= link_to 'New Cat', new_cat_path, class: "btn btn-primary" %>
-      <br>
-      <% if user_signed_in? %>
-      <a href="/cats?user=me">Show my cats</a>
+<section class="cats">
+  <div class="container all-cats">
+    <div class="row">
+      <div class="col">
+        <h1>All the cats</h1>
+        <%= link_to 'New Cat', new_cat_path, class: "btn btn-primary" %>
+        <br>
+        <% if user_signed_in? %>
+        <a href="/cats?user=me">Show my cats</a>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="card-columns">
+      <% @cats.each do |cat| %>
+        <div class="card">
+          <%= image_tag cat.picture_url(:thumb), :class => "card-img-top" if cat.picture.present? %>
+          <div class="card-body clearfix">
+            <button class="btn btn-link voting">
+              <span class="badge badge-secondary">
+                1000 <%= icon('chevron-circle-up') %>
+              </span>
+            </button>
+            <% if user_signed_in? && cat.user == current_user %>
+              <div class="text-right">
+                <%= link_to icon('trash'), cat, :class => "card-link btn btn-secondary", method: :delete, data: { confirm: 'Are you sure?' } %>
+              </div>
+            <% else %>
+              <div class="btn-group float-right" role="group">
+                <%= link_to icon('chevron-circle-up'), cat, :class => "card-link btn btn-success" %>
+                <%=  link_to icon('chevron-circle-down'), cat, :class => "card-link btn btn-danger" %>
+              </div>
+            <% end %>
+          </div>
+        </div>
       <% end %>
     </div>
   </div>
-  <div class="card-columns">
-    <% @cats.each do |cat| %>
-      <div class="card">
-        <%= image_tag cat.picture_url(:thumb), :class => "card-img-top" if cat.picture.present? %>
-        <div class="card-body clearfix">
-          <button class="btn btn-link voting">
-            <span class="badge badge-secondary">
-              1000 <%= icon('chevron-circle-up') %>
-            </span>
-          </button>
-          <% if user_signed_in? && cat.user == current_user %>
-            <div class="text-right">
-              <%= link_to icon('trash'), cat, :class => "card-link btn btn-secondary", method: :delete, data: { confirm: 'Are you sure?' } %>
-            </div>
-          <% else %>
-            <div class="btn-group float-right" role="group">
-              <%= link_to icon('chevron-circle-up'), cat, :class => "card-link btn btn-success" %>
-              <%=  link_to icon('chevron-circle-down'), cat, :class => "card-link btn btn-danger" %>
-            </div>
-          <% end %>
-        </div>
-      </div>
-    <% end %>
-  </div>
-</div>
+</section>

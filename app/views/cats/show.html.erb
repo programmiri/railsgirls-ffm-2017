@@ -1,14 +1,32 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Picture:</strong>
-  <%= @cat.picture %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @cat.user_id %>
-</p>
-
-<%= link_to 'Edit', edit_cat_path(@cat) %> |
-<%= link_to 'Back', cats_path %>
+<div class="container cats">
+  <div class="row">
+    <div class="col text-center">
+      <h1>Thank you!</h1>
+      <p>
+        Your lovley cat was successfully uploaded. We added an upvote from you to your cat, because, well, it's your cat <%= icon('heart') %>
+      </p>
+      <div class="card">
+        <%= image_tag @cat.picture_url(:thumb), :class => "card-img-top" if @cat.picture.present? %>
+        <div class="card-body">
+          <button class="btn btn-link voting">
+            <span class="badge badge-secondary">
+              1000 <%= icon('chevron-circle-up') %>
+            </span>
+          </button>
+          <% if user_signed_in? && @cat.user == current_user %>
+            <div class="text-right">
+              <%= link_to icon('trash'), @cat, :class => "card-link btn btn-secondary", method: :delete, data: { confirm: 'Are you sure?' } %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col text-center">
+      <%= link_to 'Add another picture', new_cat_path, class: "btn btn-primary" %>
+        or
+      <%= link_to 'See all the cats', cats_path,  :class => "btn btn-link" %>
+    </div>
+  </div>
+</div>
