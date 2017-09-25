@@ -16,13 +16,11 @@
       <div class="card">
         <%= image_tag cat.picture_url(:thumb), :class => "card-img-top" if cat.picture.present? %>
         <div class="card-body clearfix">
-          <div class="float-left">
-            <button class="btn btn-link">
-              <span class="badge badge-secondary">
-                1000 <%= icon('chevron-circle-up') %>
-              </span>
-            </button>
-          </div>
+          <button class="btn btn-link voting">
+            <span class="badge badge-secondary">
+              1000 <%= icon('chevron-circle-up') %>
+            </span>
+          </button>
           <% if user_signed_in? && cat.user == current_user %>
             <div class="text-right">
               <%= link_to icon('trash'), cat, :class => "card-link btn btn-secondary", method: :delete, data: { confirm: 'Are you sure?' } %>
