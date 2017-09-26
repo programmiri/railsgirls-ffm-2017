@@ -1,10 +1,12 @@
 <div class="container cats">
   <div class="row">
     <div class="col text-center">
-      <h1>Thank you!</h1>
-      <p>
-        Your lovley cat was successfully uploaded. We added an upvote from you to your cat, because, well, it's your cat <%= icon('heart') %>
-      </p>
+      <div class="alert alert-secondary" role="alert">
+        <h4 class="alert-heading">Thank you!</h4>
+        <p>Thanks for uploading your picture. We added an upvote from you to your cat, because, well, it's your cat <%= icon('heart') %></p>
+        <hr>
+        <p class="mb-0">You can delete your picture anytime. Just go to your profile page.</p>
+      </div>
       <div class="card">
         <%= image_tag @cat.picture_url(:thumb), :class => "card-img-top" if @cat.picture.present? %>
         <div class="card-body">
